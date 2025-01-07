@@ -1,0 +1,26 @@
+CREATE DATABASE IF NOT EXISTS library;
+USE library;
+
+CREATE TABLE Book (
+    bid INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    pages INT NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    year DATE NOT NULL
+);
+
+CREATE TABLE Author (
+    aid INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    username VARCHAR(255) UNIQUE,
+    password VARCHAR(255)
+);
+
+CREATE TABLE Publish (
+    bid INT,
+    aid INT,
+    PRIMARY KEY (bid, aid),
+    FOREIGN KEY (bid) REFERENCES Book(bid) ON DELETE CASCADE,
+    FOREIGN KEY (aid) REFERENCES Author(aid) ON DELETE CASCADE
+);
